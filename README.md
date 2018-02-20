@@ -1,11 +1,10 @@
 # My dotfiles
 
-install stow and start use them..
+install stow and start use it..
 
 https://alexpearce.me/2016/02/managing-dotfiles-with-stow/
 
-
-## NeoVim
+## NeoVim
 
 - install vim-plug
 
