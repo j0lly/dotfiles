@@ -1,8 +1,8 @@
 # My dotfiles
 
-install stow and start use them.. 
-https://alexpearce.me/2016/02/managing-dotfiles-with-stow/
+install stow and start use them..
 
+https://alexpearce.me/2016/02/managing-dotfiles-with-stow/
 
 ## NeoVim
 
