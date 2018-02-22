@@ -26,6 +26,7 @@ Plug 'tpope/vim-markdown'
 " ColorScheme
 Plug 'whatyouhide/vim-gotham'
 Plug 'ajmwagar/vim-deus'
+Plug 'KeitaNakamura/neodark.vim'
 Plug 'vim-scripts/Zenburn'
 
 
@@ -35,7 +36,7 @@ call plug#end()
 
 """Theme
 """"""""
-colorscheme zenburn
+colorscheme neodark
 
 """ Base
 """"""""
@@ -247,6 +248,7 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeShowHidden = 1
 
 
 """ py.test
