@@ -15,6 +15,7 @@ Plug 'ervandew/supertab'
 Plug 'junegunn/goyo.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'metakirby5/codi.vim'
+Plug 'severin-lemaignan/vim-minimap'
 
 " Platform specific
 Plug 'juliosueiras/vim-terraform-completion'
@@ -316,3 +317,9 @@ let g:AWSVimValidate = 1
 """"""""""""
 
 let g:deoplete#enable_at_startup = 1
+
+
+""" vim-minimap
+"""""""""""""""
+
+let g:minimap_toggle='mm'
