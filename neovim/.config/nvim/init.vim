@@ -14,8 +14,8 @@ Plug 'vim-syntastic/syntastic'
 Plug 'ervandew/supertab'
 Plug 'junegunn/goyo.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'metakirby5/codi.vim'
 Plug 'severin-lemaignan/vim-minimap'
+Plug 'airblade/vim-gitgutter'
 
 " Platform specific
 Plug 'juliosueiras/vim-terraform-completion'
@@ -71,15 +71,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-" Automatic reloading of .vimrc
-autocmd! bufwritepost .vimrc source %
-
 " save if no sudo
 cmap w!! w !sudo tee % >/dev/null
-
-" convert yml to json and vice-versa (https://www.npmjs.com/package/json2yaml and the opposite)
-map <Leader>j :%! yaml2json<CR>
-map <Leader>y :%! json2yaml<CR>
 
 " Ctrl c copy style in visual mode
 vnoremap <C-c> :w !pbcopy<CR><CR>
@@ -218,6 +211,7 @@ au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Markdown IDE Setup
 " ============================================================================
 let g:vim_markdown_folding_style_pythonic = 1
+let g:markdown_fenced_languages = ['html', 'ruby', 'sql', 'python', 'bash=sh']
 
 
 """ Syntastic
