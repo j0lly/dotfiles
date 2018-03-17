@@ -1,6 +1,13 @@
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
+" Install Vim Plug if not installed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 
 " Core
@@ -16,14 +23,24 @@ Plug 'junegunn/goyo.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'airblade/vim-gitgutter'
+Plug 'neomake/neomake'
 
 " Platform specific
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'm-kat/aws-vim'
+Plug 'tpope/vim-markdown'
+" Python
 Plug 'zchee/deoplete-jedi'
 Plug 'alfredodeza/pytest.vim'
-Plug 'tpope/vim-markdown'
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+" Javascript
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'npm install',
+      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue']}
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
+Plug 'carlitux/deoplete-ternjs'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Quramy/tsuquyomi', { 'do': 'npm install -g typescript' }
+Plug 'mhartington/deoplete-typescript'
 
 " ColorScheme
 Plug 'whatyouhide/vim-gotham'
@@ -111,6 +128,7 @@ set viminfo^=%
 " Removes highlight of your last search
 nnoremap <F3> :set hlsearch!<CR>
 
+
 " Enable syntax highlighting
 filetype off
 filetype plugin indent on
@@ -123,6 +141,9 @@ set splitright
 
 """ Shortcuts
 """""""""""""
+
+" Reload vim config file
+nnoremap rr :so $MYVIMRC<CR>
 
 " Yank from current cursor position to end of line
 map Y y$
@@ -200,6 +221,14 @@ au FileType html,css
     \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 
+" ============================================================================
+" Javascript IDE Setup
+" ============================================================================
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
 
 " ============================================================================
 " YAML IDE Setup
@@ -226,9 +255,12 @@ let g:syntastic_yaml_checkers = ['yamllint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 
+""" NeoMake
+"""""""""""
+" no transition from syntastic yet
 
 """ Codi https://github.com/metakirby5/codi.vim
 """"""""
@@ -313,9 +345,37 @@ let g:AWSVimValidate = 1
 """"""""""""
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
+let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+
+let g:tern_request_timeout = 1
+let g:tern_request_timeout = 6000
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+let g:deoplete#sources#tss#javascript_support = 1
+let g:tsuquyomi_javascript_support = 1
+let g:tsuquyomi_auto_open = 1
+let g:tsuquyomi_disable_quickfix = 1
+
 
 
 """ vim-minimap
 """""""""""""""
 
 let g:minimap_toggle='mm'
+
+
+""" vim-prettier
+""""""""""""""""
+
+let g:prettier#exec_cmd_async = 1
+let g:prettier#config#print_width = 100
+let g:prettier#config#single_quote = 'false'
+let g:prettier#config#arrow_parens = 'always'
+let g:prettier#config#bracket_spacing = 'true'
