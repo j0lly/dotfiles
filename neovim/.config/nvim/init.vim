@@ -23,6 +23,7 @@ Plug 'm-kat/aws-vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'alfredodeza/pytest.vim'
 Plug 'tpope/vim-markdown'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 " ColorScheme
 Plug 'whatyouhide/vim-gotham'
@@ -195,10 +196,9 @@ au BufNewFile,BufRead *.py
 " ============================================================================
 " WEB IDE Setup
 " ============================================================================
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2    |
-    \ set softtabstop=2    |
-    \ set shiftwidth=2
+au FileType html,css
+    \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
+
 
 
 " ============================================================================
@@ -223,6 +223,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_python_checkers = ['flake8', 'pylint', 'pep257', 'pep8', 'python']
 let g:syntastic_yaml_checkers = ['yamllint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
