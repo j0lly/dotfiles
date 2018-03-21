@@ -24,6 +24,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'airblade/vim-gitgutter'
 Plug 'neomake/neomake'
+Plug 'majutsushi/tagbar'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
 
 " Platform specific
 Plug 'juliosueiras/vim-terraform-completion'
@@ -262,12 +265,6 @@ let g:syntastic_check_on_wq = 1
 """""""""""
 " no transition from syntastic yet
 
-""" Codi https://github.com/metakirby5/codi.vim
-""""""""
-
-" nmap <C-c> :Codi!!<CR>
-" let g:codi#autoclose = 1
-
 
 """ Nerdtree
 """"""""""""
@@ -364,6 +361,19 @@ let g:tsuquyomi_auto_open = 1
 let g:tsuquyomi_disable_quickfix = 1
 
 
+""" tagbar
+""""""""""
+
+nmap mt :TagbarToggle<CR>
+
+
+""" easytags
+""""""""""""
+
+let g:easytags_always_enabled = 1
+let g:easytags_async = 1
+let g:easytags_events = ['BufWritePost']
+
 
 """ vim-minimap
 """""""""""""""
@@ -376,6 +386,8 @@ let g:minimap_toggle='mm'
 
 let g:prettier#exec_cmd_async = 1
 let g:prettier#config#print_width = 100
-let g:prettier#config#single_quote = 'false'
+let g:prettier#config#single_quote = 'true'
 let g:prettier#config#arrow_parens = 'always'
-let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#bracket_spacing = 'false'
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
