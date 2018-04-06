@@ -156,6 +156,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 
+" Reload ALL
+nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>:bufdo e<cr>
+
+
 """ Visual & colors
 """""""""""""""""""
 
