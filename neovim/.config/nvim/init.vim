@@ -43,7 +43,8 @@ Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'carlitux/deoplete-ternjs'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Quramy/tsuquyomi', { 'do': 'npm install -g typescript' }
-Plug 'mhartington/deoplete-typescript'
+Plug 'HerringtonDarkholme/yats'
+Plug 'mhartington/nvim-typescript'
 
 " ColorScheme
 Plug 'whatyouhide/vim-gotham'
@@ -215,7 +216,7 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4    |
     \ set softtabstop=4    |
     \ set shiftwidth=4    |
-    \ set textwidth=80    |
+    \ set textwidth=90    |
     \ set expandtab    |
     \ set autoindent    |
     \ set fileformat=unix
@@ -257,7 +258,7 @@ let g:markdown_fenced_languages = ['html', 'ruby', 'sql', 'python', 'bash=sh']
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_python_checkers = ['flake8', 'pylint', 'pep257', 'pep8', 'python']
+let g:syntastic_python_checkers = ['flake8', 'pylint', 'pep257']
 let g:syntastic_yaml_checkers = ['yamllint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
@@ -353,7 +354,7 @@ let g:deoplete#enable_refresh_always = 1
 let g:deoplete#max_abbr_width = 0
 let g:deoplete#max_menu_width = 0
 let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
 let g:tern_request_timeout = 1
 let g:tern_request_timeout = 6000
