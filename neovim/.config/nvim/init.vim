@@ -109,6 +109,7 @@ set smartcase
 
 " Save when losing focus
 au FocusLost * :silent! wall
+set autowriteall
 
 " Better copy & paste
 set pastetoggle=<F2>
