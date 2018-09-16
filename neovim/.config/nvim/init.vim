@@ -32,17 +32,19 @@ Plug 'xolox/vim-easytags'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'm-kat/aws-vim'
 Plug 'tpope/vim-markdown'
+
 " Python
 Plug 'zchee/deoplete-jedi'
 Plug 'alfredodeza/pytest.vim'
+
 " Javascript
+Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', {
       \ 'do': 'npm install',
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue']}
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'carlitux/deoplete-ternjs'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Quramy/tsuquyomi', { 'do': 'npm install -g typescript' }
 Plug 'HerringtonDarkholme/yats'
 Plug 'mhartington/nvim-typescript'
 
@@ -221,6 +223,14 @@ au BufNewFile,BufRead *.py
     \ set expandtab    |
     \ set autoindent    |
     \ set fileformat=unix
+
+
+" ============================================================================
+" Yaml configs Setup
+" ============================================================================
+
+au BufNewFile,BufRead *.template
+    \ set syn=yaml
 
 
 " ============================================================================
