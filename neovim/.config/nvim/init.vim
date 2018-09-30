@@ -286,6 +286,7 @@ let g:jedi#use_tabs_not_buffers = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
 set laststatus=2
+let g:airline#extensions#tabline#enabled = 1
 
 
 """ Ctrlp
