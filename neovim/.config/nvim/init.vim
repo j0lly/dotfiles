@@ -17,7 +17,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'blueyed/vim-diminactive'
-Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
 Plug 'ervandew/supertab'
 Plug 'junegunn/goyo.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -27,6 +27,7 @@ Plug 'neomake/neomake'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
+Plug 'w0rp/ale'
 
 " Platform specific
 Plug 'juliosueiras/vim-terraform-completion'
@@ -38,15 +39,13 @@ Plug 'zchee/deoplete-jedi'
 Plug 'alfredodeza/pytest.vim'
 
 " Javascript
-Plug 'w0rp/ale'
-Plug 'prettier/vim-prettier', {
-      \ 'do': 'npm install',
-      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue']}
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
-Plug 'carlitux/deoplete-ternjs'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'HerringtonDarkholme/yats'
-Plug 'mhartington/nvim-typescript'
+"Plug 'prettier/vim-prettier', {
+"      \ 'do': 'npm install',
+"      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue']}
+"Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
+"Plug 'carlitux/deoplete-ternjs'
+"Plug 'HerringtonDarkholme/yats'
+"Plug 'mhartington/nvim-typescript'
 
 " ColorScheme
 Plug 'whatyouhide/vim-gotham'
@@ -245,7 +244,7 @@ au FileType html,css
 " ============================================================================
 augroup javascript_folding
     au!
-    au FileType javascript setlocal foldmethod=syntax
+    au FileType javascript setlocal foldmethod=indent
 augroup END
 
 
