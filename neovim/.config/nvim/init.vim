@@ -23,7 +23,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'airblade/vim-gitgutter'
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
@@ -39,13 +39,8 @@ Plug 'zchee/deoplete-jedi'
 Plug 'alfredodeza/pytest.vim'
 
 " Javascript
-"Plug 'prettier/vim-prettier', {
-"      \ 'do': 'npm install',
-"      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue']}
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
-"Plug 'carlitux/deoplete-ternjs'
-"Plug 'HerringtonDarkholme/yats'
-"Plug 'mhartington/nvim-typescript'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 " ColorScheme
 Plug 'whatyouhide/vim-gotham'
@@ -240,15 +235,6 @@ au FileType html,css
 
 
 " ============================================================================
-" Javascript IDE Setup
-" ============================================================================
-augroup javascript_folding
-    au!
-    au FileType javascript setlocal foldmethod=indent
-augroup END
-
-
-" ============================================================================
 " YAML IDE Setup
 " ============================================================================
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
@@ -259,26 +245,6 @@ au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " ============================================================================
 let g:vim_markdown_folding_style_pythonic = 1
 let g:markdown_fenced_languages = ['html', 'ruby', 'sql', 'python', 'bash=sh']
-
-
-""" Syntastic
-"""""""""""""
-
-" for generic syntax checks
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_python_checkers = ['flake8', 'pylint', 'pep257']
-let g:syntastic_yaml_checkers = ['yamllint']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-
-""" NeoMake
-"""""""""""
-" no transition from syntastic yet
 
 
 """ Nerdtree
@@ -395,14 +361,14 @@ let g:easytags_events = ['BufWritePost']
 
 let g:minimap_toggle='mm'
 
+""" ALE
+"""""""
 
-""" vim-prettier
-""""""""""""""""
-
-let g:prettier#exec_cmd_async = 1
-let g:prettier#config#print_width = 100
-let g:prettier#config#single_quote = 'true'
-let g:prettier#config#arrow_parens = 'always'
-let g:prettier#config#bracket_spacing = 'false'
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_fix_on_save = 1
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
