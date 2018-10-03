@@ -1,4 +1,9 @@
-" Specify a directory for plugins
+""" Pyenv Workaround
+""""""""""""""""""""
+
+let g:python3_host_prog = $HOME.'/.pyenv/versions/neovim3/bin/python'
+let g:python_host_prog = $HOME.'/.pyenv/versions/neovim2/bin/python'
+
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 " Install Vim Plug if not installed
@@ -58,6 +63,7 @@ colorscheme neodark
 
 """ Base
 """"""""
+
 
 set t_Co=256
 set encoding=utf-8
@@ -204,30 +210,6 @@ noremap <leader><right>  :rightbelow vnew<CR>
 noremap <leader><up>     :leftabove  new<CR>
 noremap <leader><down>   :rightbelow new<CR>
 
-
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
-let python_highlight_all=1
-au BufNewFile,BufRead *.py
-    \ set tabstop=4    |
-    \ set softtabstop=4    |
-    \ set shiftwidth=4    |
-    \ set textwidth=90    |
-    \ set expandtab    |
-    \ set autoindent    |
-    \ set fileformat=unix
-
-
-" ============================================================================
-" Yaml configs Setup
-" ============================================================================
-
-au BufNewFile,BufRead *.template
-    \ set syn=yaml
-
-
 " ============================================================================
 " WEB IDE Setup
 " ============================================================================
@@ -262,11 +244,11 @@ let NERDTreeShowHidden = 1
 """ py.test
 """""""""""
 
-" nmap <silent><Leader>f <Esc>:Pytest file<CR>
-" nmap <silent><leader><Leader>f <Esc>:Pytest file looponfail<CR>
-" nmap <silent><Leader>c <Esc>:Pytest class<CR>
-" nmap <silent><Leader>m <Esc>:Pytest method<CR>
-" nmap <silent><Leader>s <Esc>:Pytest session<CR>
+nmap <silent><Leader>f <Esc>:Pytest file<CR>
+nmap <silent><leader><Leader>f <Esc>:Pytest file looponfail<CR>
+nmap <silent><Leader>c <Esc>:Pytest class<CR>
+nmap <silent><Leader>m <Esc>:Pytest method<CR>
+nmap <silent><Leader>p <Esc>:Pytest method<CR>
 
 
 """ vim-tdd
@@ -329,8 +311,8 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 let g:deoplete#enable_refresh_always = 1
-let g:deoplete#max_abbr_width = 0
-let g:deoplete#max_menu_width = 0
+"let g:deoplete#max_abbr_width = 0
+"let g:deoplete#max_menu_width = 0
 let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
@@ -366,6 +348,8 @@ let g:minimap_toggle='mm'
 """ ALE
 """""""
 
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_completion_enabled = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
