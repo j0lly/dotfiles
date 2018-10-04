@@ -1,9 +1,3 @@
-""" Pyenv Workaround
-""""""""""""""""""""
-
-let g:python3_host_prog = $HOME.'/.pyenv/versions/neovim3/bin/python'
-let g:python_host_prog = $HOME.'/.pyenv/versions/neovim2/bin/python'
-
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 " Install Vim Plug if not installed
@@ -56,6 +50,22 @@ Plug 'vim-scripts/Zenburn'
 " Initialize plugin system
 call plug#end()
 
+""" Visual & colors
+"""""""""""""""""""
+
+" Showing line numbers and length
+set number  " show line numbers
+" set tw=80   " width of document (used by gd)
+set nowrap  " don't automatically wrap on load
+set fo-=t   " don't automatically wrap text when typing
+set colorcolumn=80
+highlight ColorColumn ctermbg=234
+
+" Show whitespace
+" MUST be inserted BEFORE the colorscheme command
+au ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
+highlight ExtraWhitespace ctermbg=red guibg=red
 
 """Theme
 """"""""
@@ -63,11 +73,12 @@ colorscheme neodark
 
 """ Base
 """"""""
-
-
 set t_Co=256
 set encoding=utf-8
 let mapleader = ","
+set nofoldenable
+set foldmethod=indent
+set foldlevel=99
 
 " Real programmers don't use TABs but spaces
 set tabstop=2
@@ -76,11 +87,6 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
-" folding
-set nofoldenable
-set foldmethod=indent
-set foldlevel=99
-
 " Enable folding with the spacebar
 nnoremap <space> za
 " fold all
@@ -88,8 +94,7 @@ nnoremap <Leader><space> zM
 " unfold all
 nnoremap <Leader><Leader><space> zR
 
-" Disable stupid backup and swap files - they trigger too many events
-" for file system watchers
+" Disable stupid backup and swap files
 set nobackup
 set nowritebackup
 set noswapfile
@@ -100,7 +105,6 @@ cmap w!! w !sudo tee % >/dev/null
 " Ctrl c copy style in visual mode
 vnoremap <C-c> :w !pbcopy<CR><CR>
 vnoremap <C-x> :!pbcopy<CR>
-"vnoremap <C-C> :.w !pbcopy<CR><CR>
 
 " Make search case insensitive
 set hlsearch
@@ -146,6 +150,8 @@ syntax on
 set splitbelow
 set splitright
 
+" mapping with faster reaction (defaut 1000)
+set timeoutlen=500
 
 """ Shortcuts
 """""""""""""
@@ -165,29 +171,19 @@ vnoremap > >gv
 nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>:bufdo e<cr>
 
 
-""" Visual & colors
-"""""""""""""""""""
-
-" Showing line numbers and length
-set number  " show line numbers
-" set tw=80   " width of document (used by gd)
-set nowrap  " don't automatically wrap on load
-set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=80
-highlight ColorColumn ctermbg=234
-
-" Show whitespace
-" MUST be inserted BEFORE the colorscheme command
-au ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
-highlight ExtraWhitespace ctermbg=red guibg=red
-
 
 """ Windows
 """""""""""
 
-" cycle windows like browser
+" cycle windows & buffers like browser
+map <S-Tab> :bnext<CR>
 map <Tab> <C-W>w
+
+" Close all other buffers
+map <silent> QQ :%bd\|e#<CR>
+
+" Easy quitting current buffer
+nnoremap <silent> qq :bdelete<CR>
 
 " Windows limits
 set winheight=30
@@ -199,36 +195,17 @@ silent! set winminwidth=30
 nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 
+
 " window
-nmap <leader><leader><left>  :topleft  vnew<CR>
-nmap <leader><leader><right> :botright vnew<CR>
-nmap <leader><leader><up>    :topleft  new<CR>
-nmap <leader><leader><down>  :botright new<CR>
+nmap <leader><left>  :topleft  vnew<CR>
+nmap <leader><right> :botright vnew<CR>
+nmap <leader><up>    :topleft  new<CR>
+nmap <leader><down>  :botright new<CR>
 " buffer
-noremap <leader><left>   :leftabove  vnew<CR>
-noremap <leader><right>  :rightbelow vnew<CR>
-noremap <leader><up>     :leftabove  new<CR>
-noremap <leader><down>   :rightbelow new<CR>
-
-" ============================================================================
-" WEB IDE Setup
-" ============================================================================
-au FileType html,css
-    \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
-
-
-" ============================================================================
-" YAML IDE Setup
-" ============================================================================
-au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-
-" ============================================================================
-" Markdown IDE Setup
-" ============================================================================
-let g:vim_markdown_folding_style_pythonic = 1
-let g:markdown_fenced_languages = ['html', 'ruby', 'sql', 'python', 'bash=sh']
-
+noremap <leader><leader><left>   :leftabove  vnew<CR>
+noremap <leader><leader><right>  :rightbelow vnew<CR>
+noremap <leader><leader><up>     :leftabove  new<CR>
+noremap <leader><leader><down>   :rightbelow new<CR>
 
 """ Nerdtree
 """"""""""""
@@ -239,31 +216,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeShowHidden = 1
-
-
-""" py.test
-"""""""""""
-
-nmap <silent><Leader>f <Esc>:Pytest file<CR>
-nmap <silent><leader><Leader>f <Esc>:Pytest file looponfail<CR>
-nmap <silent><Leader>c <Esc>:Pytest class<CR>
-nmap <silent><Leader>m <Esc>:Pytest method<CR>
-nmap <silent><Leader>p <Esc>:Pytest method<CR>
-
-
-""" vim-tdd
-"""""""""""
-
-let g:tdd_map_callback = 'python_tdd#map'
-let g:tdd_test_command = 'py.test'
-
-
-""" Jedi
-""""""""
-
-let g:jedi#popup_select_first = 1
-let g:jedi#use_tabs_not_buffers = 1
-
 
 """ Vim-airline https://github.com/bling/vim-airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""
@@ -311,19 +263,8 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 let g:deoplete#enable_refresh_always = 1
-"let g:deoplete#max_abbr_width = 0
-"let g:deoplete#max_menu_width = 0
 let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-
-let g:tern_request_timeout = 1
-let g:tern_request_timeout = 6000
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-let g:deoplete#sources#tss#javascript_support = 1
-let g:tsuquyomi_javascript_support = 1
-let g:tsuquyomi_auto_open = 1
-let g:tsuquyomi_disable_quickfix = 1
 
 
 """ tagbar
@@ -344,6 +285,7 @@ let g:easytags_events = ['BufWritePost']
 """""""""""""""
 
 let g:minimap_toggle='mm'
+let g:minimap_highlight='ErrorMsg'
 
 """ ALE
 """""""
