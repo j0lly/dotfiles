@@ -23,10 +23,4 @@ nmap <silent><Leader>p <Esc>:Pytest method<CR>
 """"""""
 
 let g:jedi#popup_select_first = 1
-let g:jedi#use_tabs_not_buffers = 1
-
-""" Pyenv Workaround
-""""""""""""""""""""
-
-let g:python3_host_prog = $HOME.'/.pyenv/versions/neovim3/bin/python'
-let g:python_host_prog = $HOME.'/.pyenv/versions/neovim2/bin/python'
+  let g:jedi#use_tabs_not_buffers = 1
