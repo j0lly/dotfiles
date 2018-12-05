@@ -26,6 +26,7 @@ Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 Plug 'w0rp/ale'
+Plug 'skywind3000/asyncrun.vim'
 
 " Platform specific
 Plug 'juliosueiras/vim-terraform-completion'
@@ -258,6 +259,8 @@ endif
 """""""""
 
 let g:ctrlp_max_height = 12
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
@@ -307,8 +310,9 @@ nmap mt :TagbarToggle<CR>
 """"""""""""
 
 let g:easytags_always_enabled = 1
+let g:easytags_auto_update = 1
 let g:easytags_async = 1
-let g:easytags_events = ['BufWritePost']
+" let g:easytags_events = ['BufWritePost']
 
 
 """ vim-minimap
