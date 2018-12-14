@@ -27,6 +27,7 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 Plug 'w0rp/ale'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'PProvost/vim-ps1'
 
 " Platform specific
 Plug 'juliosueiras/vim-terraform-completion'

@@ -4,7 +4,7 @@ alias workoff='deactivate'
 alias vim='nvim'
 alias cf='aws cloudformation'
 
-export PATH="~/.pyenv:/bin:/usr/local/sbin:$PATH:~/bin:$HOME/.cdk/bin"
+export PATH="~/.pyenv:/bin:/usr/local/sbin:$PATH:~/bin:$HOME/.cdk/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PROMPT_COMMAND='history -a'
 
 
